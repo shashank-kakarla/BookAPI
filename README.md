@@ -121,8 +121,14 @@ This operation here also prevents creation of duplicate data.
 Developed dockerfile to build and run the bookapi service, Inorder to attach Database used MySql as a database and implemented docker-compose
 
 ### Pre-requisites
-  1. docker
-  2. docker-compose
+  1. git
+  2. docker
+  3. docker-compose
+
+**Clone repo to Local**
+```shell
+    git clone https://github.com/shashank-kakarla/BookAPI.git
+```
 
 **Build & Deploy Book-API**
 
