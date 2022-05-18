@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  bookapi-mysql:
+    image: mysql
+    container_name: godb
+    ports: 
+      - 3306:3306
+      - 33060:33060
+    environment:
+      - MYSQL_DATABASE=godb
+      - MYSQL_ROOT_PASSWORD=root
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_container
+    depends_on:
+      - bookapi-mysql
+    environment:
+      - PMA_HOST=bookapi-mysql
+      - PMA_USER=test
+      - PMA_PORT=3306
+      - PMA_PASSWORD=12345
+    ports:
+      - 9090:80
+    restart: always
+
+  app:
+    container_name: bookapi
+    build: .
+    ports: 
+      - 8080:8080
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - bookapi-mysql          
+
+
+volumes:
+  api:
